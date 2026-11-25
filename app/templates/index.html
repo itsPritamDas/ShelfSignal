@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ShelfSignal — explainable retail demand forecasting and inventory intelligence.">
+  <title>ShelfSignal | Retail Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/styles.css?v=2">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#dashboard" aria-label="ShelfSignal home">
+        <span class="brand-mark">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 24V8m0 16h22M9 20l5-6 4 3 7-9"/><path d="M20 8h5v5"/></svg>
+        </span>
+        <span><strong>ShelfSignal</strong><small>RETAIL INTELLIGENCE</small></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-link active" data-section="dashboard"><span class="nav-icon">▦</span> Overview</button>
+        <button class="nav-link" data-section="forecast"><span class="nav-icon">⌁</span> Demand forecast</button>
+        <button class="nav-link" data-section="inventory"><span class="nav-icon">▤</span> Inventory planner</button>
+        <button class="nav-link" data-section="model"><span class="nav-icon">◈</span> Data & model</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="data-status"><span class="status-dot"></span><div><strong>Analytics workspace</strong><small>Retail intelligence system</small></div></div>
+        <div class="sidebar-note">Built for better decisions, backed by data.</div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Toggle navigation">☰</button>
+        <div class="breadcrumb"><span>Workspace</span><b>/</b><strong id="breadcrumbCurrent">Overview</strong></div>
+        <div class="topbar-right"><span class="live-indicator"><i></i> SYSTEM ONLINE</span><span class="avatar">SS</span></div>
+      </header>
+
+      <section class="page-section active" id="section-dashboard">
+        <div class="page-heading">
+          <div><div class="eyebrow">RETAIL PERFORMANCE</div><h1>Good decisions start with a signal.</h1><p>See what is selling, understand what is changing, and plan what comes next.</p></div>
+          <div class="heading-actions"><span class="date-chip" id="dateRange">Last 30 days</span><button class="btn btn-primary" data-go="forecast">Explore forecast <span>↗</span></button></div>
+        </div>
+
+        <div class="kpi-grid">
+          <article class="kpi-card"><div class="kpi-top"><span>Units sold · 30 days</span><span class="kpi-icon blue">▥</span></div><div class="kpi-value" id="kpiUnits">—</div><div class="kpi-foot"><span class="trend neutral" id="kpiChange">—</span><span>vs previous 30 days</span></div></article>
+          <article class="kpi-card"><div class="kpi-top"><span>Active products</span><span class="kpi-icon violet">◇</span></div><div class="kpi-value" id="kpiProducts">—</div><div class="kpi-foot"><span class="kpi-muted">Across all connected stores</span></div></article>
+          <article class="kpi-card"><div class="kpi-top"><span>Stores monitored</span><span class="kpi-icon teal">⌂</span></div><div class="kpi-value" id="kpiStores">—</div><div class="kpi-foot"><span class="kpi-muted">Retail locations in dataset</span></div></article>
+          <article class="kpi-card"><div class="kpi-top"><span>Inventory items at risk</span><span class="kpi-icon amber">!</span></div><div class="kpi-value" id="kpiRisk">—</div><div class="kpi-foot"><span class="kpi-muted">Based on lead-time demand</span></div></article>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="panel sales-panel">
+            <div class="panel-heading"><div><h2>Sales activity</h2><p>Daily units sold across all stores</p></div><span class="panel-tag">30 DAY VIEW</span></div>
+            <div class="chart-legend"><span><i class="legend-dot blue-dot"></i> Sales units</span><span class="chart-total" id="salesTotal">—</span></div>
+            <div class="chart-wrap" id="salesChart" aria-label="Daily sales chart"><div class="loading-state">Loading sales history…</div></div>
+          </article>
+          <article class="panel category-panel">
+            <div class="panel-heading"><div><h2>Category mix</h2><p>Contribution by product category</p></div><span class="panel-tag">30 DAY VIEW</span></div>
+            <div class="category-chart" id="categoryChart"><div class="loading-state">Loading categories…</div></div>
+          </article>
+        </div>
+
+        <article class="panel table-panel">
+          <div class="panel-heading"><div><h2>Top-performing products</h2><p>Highest unit sales in the last 30 days</p></div><button class="text-action" data-go="forecast">Open forecast lab ↗</button></div>
+          <div class="table-scroll"><table><thead><tr><th>PRODUCT</th><th>CATEGORY</th><th>UNITS SOLD</th><th>PERFORMANCE</th></tr></thead><tbody id="topProducts"><tr><td colspan="4" class="empty-cell">Loading product performance…</td></tr></tbody></table></div>
+        </article>
+        <div class="dashboard-footnote"><span>Data through <strong id="lastDataDate">—</strong></span><span>Sample dataset · Replace with verified retail data for operational use.</span></div>
+      </section>
+
+      <section class="page-section" id="section-forecast">
+        <div class="page-heading"><div><div class="eyebrow">PREDICTIVE ANALYTICS</div><h1>Demand forecast lab</h1><p>Explore product-level forecasts using historical demand patterns and machine learning.</p></div><span class="model-pill"><i></i><span id="forecastModelName">Model ready</span></span></div>
+        <article class="panel control-panel">
+          <div class="panel-heading"><div><h2>Forecast configuration</h2><p>Select a product, store and prediction horizon.</p></div><span class="panel-tag">SCENARIO BUILDER</span></div>
+          <div class="form-grid">
+            <label class="field"><span>Product</span><select id="forecastProduct"><option value="">Loading products…</option></select></label>
+            <label class="field"><span>Store</span><select id="forecastStore"><option value="">Loading stores…</option></select></label>
+            <label class="field"><span>Forecast horizon</span><select id="forecastHorizon"><option value="7">Next 7 days</option><option value="14">Next 14 days</option><option value="28">Next 28 days</option></select></label>
+            <div class="field field-action"><span>&nbsp;</span><button class="btn btn-primary" id="runForecast">Generate forecast <span>→</span></button></div>
+          </div>
+        </article>
+        <div class="forecast-result-grid" id="forecastSummary">
+          <article class="metric-card"><span>Forecasted units</span><strong id="forecastUnits">—</strong><small>Sum across selected horizon</small></article>
+          <article class="metric-card"><span>Average daily demand</span><strong id="forecastAverage">—</strong><small>Predicted units per day</small></article>
+          <article class="metric-card"><span>Forecast model</span><strong class="metric-model" id="forecastModel">—</strong><small>Selected using holdout WAPE</small></article>
+        </div>
+        <article class="panel forecast-chart-panel"><div class="panel-heading"><div><h2>Actual vs predicted demand</h2><p id="forecastSubtitle">Choose a product and generate a forecast.</p></div><span class="panel-tag">ROLLING HISTORY + OUTLOOK</span></div><div class="chart-legend"><span><i class="legend-dot blue-dot"></i> Actual sales</span><span><i class="legend-dot purple-dot"></i> Forecast</span></div><div class="chart-wrap forecast-chart" id="forecastChart"><div class="empty-state">Your forecast will appear here.</div></div></article>
+        <article class="insight-card"><div class="insight-symbol">✦</div><div><strong>Forecast interpretation</strong><p id="forecastInsight">Generate a forecast to see the expected demand and how to interpret it. Forecasts are estimates, not guarantees.</p></div></article>
+      </section>
+
+      <section class="page-section" id="section-inventory">
+        <div class="page-heading"><div><div class="eyebrow">DECISION SUPPORT</div><h1>Inventory planner</h1><p>Translate expected demand into practical replenishment signals.</p></div><div class="inventory-heading-actions"><span id="inventoryUpdated" class="updated-label">Awaiting first update</span><button class="btn btn-secondary" id="refreshInventory">↻ Refresh plan</button></div></div>
+        <div class="inventory-intro"><div><strong>Inventory decision logic</strong><p>Reorder point = estimated lead-time demand + safety stock. Demand uses a weighted 7-day / 28-day sales average; edit stock, lead time and buffer days to recalculate.</p></div><span class="method-chip">DEMAND-BASED REPLENISHMENT</span></div>
+        <div class="inventory-kpis" aria-live="polite">
+          <article class="inventory-stat"><span>Items analysed</span><strong id="invTotal">—</strong><small>Product and store combinations</small></article>
+          <article class="inventory-stat risk"><span>At risk</span><strong id="invRisk">—</strong><small>Below lead-time demand</small></article>
+          <article class="inventory-stat watch"><span>Reorder soon</span><strong id="invReorder">—</strong><small>Below reorder point</small></article>
+          <article class="inventory-stat healthy"><span>Healthy stock</span><strong id="invHealthy">—</strong><small>Above reorder point</small></article>
+        </div>
+        <article class="panel table-panel"><div class="panel-heading"><div><h2>Replenishment recommendations</h2><p>Prioritised by estimated stock risk. Search or filter to focus the review.</p></div><div class="inventory-tools"><label class="inventory-search"><span class="sr-only">Search products</span><input id="inventorySearch" type="search" placeholder="Search product or store…"></label><div class="filter-control"><label for="inventoryFilter">Status</label><select id="inventoryFilter"><option value="all">All items</option><option value="At risk">At risk</option><option value="Reorder soon">Reorder soon</option><option value="Healthy">Healthy</option></select></div></div></div>
+          <div class="table-scroll"><table><thead><tr><th>PRODUCT / STORE</th><th>ON HAND</th><th>LEAD TIME</th><th>SAFETY STOCK</th><th>LEAD-TIME DEMAND</th><th>REORDER POINT</th><th>SUGGESTED ORDER</th><th>STATUS</th><th>UPDATE</th></tr></thead><tbody id="inventoryRows"><tr><td colspan="9" class="empty-cell">Loading inventory plan…</td></tr></tbody></table></div>
+          <div class="table-note">Stock, lead-time and safety-stock inputs are editable planning inputs. Validate operational policies before using recommendations in a real business.</div>
+        </article>
+      </section>
+
+      <section class="page-section" id="section-model">
+        <div class="page-heading"><div><div class="eyebrow">MODEL GOVERNANCE</div><h1>Data & model workspace</h1><p>Inspect the dataset, compare forecasting approaches and refresh the model.</p></div><button class="btn btn-primary" id="retrainModel">↻ Retrain models</button></div>
+        <div class="model-grid">
+          <article class="panel"><div class="panel-heading"><div><h2>Model benchmark</h2><p>Chronological holdout comparison</p></div><span class="panel-tag">LOWER IS BETTER · WAPE</span></div><div class="table-scroll"><table><thead><tr><th>MODEL</th><th>MAE</th><th>RMSE</th><th>WAPE</th><th>R²</th></tr></thead><tbody id="modelMetrics"><tr><td colspan="5" class="empty-cell">Loading model metrics…</td></tr></tbody></table></div><p class="method-note" id="backtestNote">Metrics will load with the model.</p></article>
+          <article class="panel feature-panel"><div class="panel-heading"><div><h2>Signal importance</h2><p>Most useful inputs for the selected model</p></div></div><div id="featureImportance" class="feature-list"><div class="loading-state">Loading feature insights…</div></div></article>
+        </div>
+        <article class="panel upload-panel"><div class="panel-heading"><div><h2>Import your own retail data</h2><p>Upload a CSV to analyse your own retail history.</p></div><span class="panel-tag">CSV IMPORT</span></div>
+          <div class="upload-layout"><div class="upload-drop"><div class="upload-icon">⇧</div><strong>Choose a sales CSV</strong><p>Maximum 12 MB · Up to 10,000 rows per upload</p><input type="file" id="csvFile" accept=".csv,text/csv"><button class="btn btn-secondary" id="uploadCsv">Upload dataset</button><div id="uploadMessage" class="upload-message" role="status"></div></div>
+            <div class="csv-guide"><strong>Required columns</strong><code>date, store_id, product_id, sales_units</code><strong>Optional columns</strong><code>unit_price, promotion, holiday, product_name, category</code><p>Dates should be YYYY-MM-DD. Each product-store-date combination should be unique. Uploads are validated and existing matching rows are updated.</p><a href="/static/sample_upload_template.csv" download>Download CSV template ↓</a></div></div>
+        </article>
+        <article class="panel methodology-panel"><div class="panel-heading"><div><h2>Methodology & limitations</h2><p>What this prototype does—and what it does not claim.</p></div></div><div class="methodology-grid"><div><strong>Feature engineering</strong><p>1, 7, 14 and 28-day lag values, rolling averages, calendar fields, price and promotion flags.</p></div><div><strong>Validation</strong><p>Chronological 28-day holdout. Reported metrics use a rolling one-step backtest with observed previous lags.</p></div><div><strong>Recursive outlook</strong><p>Future days use earlier predictions as lag inputs. Multi-day forecast error may therefore be higher.</p></div><div><strong>Inventory assumptions</strong><p>On-hand stock, lead time and safety stock are editable inputs. The bundled sample inventory is synthetic.</p></div></div></article>
+      </section>
+
+      <footer class="app-footer"><span>© 2026 ShelfSignal · Academic Data Science Project</span><span>Built with Python · Machine Learning · SQL</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/static/js/app.js?v=2"></script>
+</body>
+</html>

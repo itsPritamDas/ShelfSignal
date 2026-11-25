@@ -1,0 +1,12 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+instance/*.db
+instance/models/*.joblib
+uploads/*
+!uploads/.gitkeep
+.DS_Store
+\n# Keep deployment assets tracked; ignore only local runtime output.\n
