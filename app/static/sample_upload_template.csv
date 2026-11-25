@@ -1,0 +1,3 @@
+date,store_id,product_id,sales_units,unit_price,promotion,holiday,product_name,category
+2025-01-01,STORE_01,P001,38,58.00,0,1,Whole Milk 1L,Dairy
+2025-01-02,STORE_01,P001,35,58.00,0,0,Whole Milk 1L,Dairy
